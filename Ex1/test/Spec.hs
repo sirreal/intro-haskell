@@ -1,4 +1,5 @@
 import Lib
+import System.Exit (ExitCode(..), exitWith)
 
 import Testing
 
@@ -47,4 +48,11 @@ ex1Tests = [ Test "lastDigit test" testLastDigit
              ]
            ]
 
-main = print $ runTests ex1Tests
+main = do
+    let results = runTests ex1Tests
+    print results
+    let status = if null results
+                    then ExitSuccess
+                    else ExitFailure 1
+    exitWith status
+
